@@ -1,0 +1,13 @@
+
+.idea/
+target
+derby.log
+metastore_db
+ignore/
+.settings/
+.cache-main
+.classpath
+spark-warehouse/
+pom.xml
+.project
+.travis.yml
