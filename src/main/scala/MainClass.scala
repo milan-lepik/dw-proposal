@@ -1,7 +1,6 @@
 package prog
 
-import com.mongodb.spark.MongoSpark
-import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql._
 import com.mongodb.spark.config._
 import com.typesafe.config.ConfigFactory
 
@@ -17,10 +16,21 @@ object MainClass extends App{
 
   val mongo = new SparkMongoExtract(sparkSession);
   val sparkSQL = new SparkSQLTransform(sparkSession);
-  val influxDB = new InfluxDBLoad(conf.getString("app.influxDB.url"),conf.getInt("app.influxDB.port"),conf.getString("app.influxDB.dbName"));
+  val influxDB = new InfluxDBLoad(
+    conf.getString("app.influxDB.url"),
+    conf.getInt("app.influxDB.port"),
+    conf.getString("app.influxDB.dbName"),
+    conf.getString("app.influxDB.sinceDate")
+  );
 
+  // SparkMongoExtract
   mongo.extract()
-  influxDB.load(sparkSQL.transform())
+
+  // SparkSQLTransform
+  val transformation: Dataset[Row] = sparkSQL.transform();
+
+  // InfluxDBLoad
+  influxDB.load(transformation)
 
   sparkSession.close()
 }

@@ -16,7 +16,11 @@ class SparkMongoExtract(sparkSession: SparkSession) {
     useCollection[ComponentType]("componentType", sparkSession)
   }
   
-  private def useCollection[D <: Product: TypeTag: NotNothing](collectionName: String, sparkSession: SparkSession, printCollectionInfo: Boolean = false) = {
+  private def useCollection[D <: Product: TypeTag: NotNothing](
+      collectionName: String, 
+      sparkSession: SparkSession, 
+      printCollectionInfo: Boolean = false
+    ) = {
     val readConfig = ReadConfig(Map("collection" -> collectionName), Some(ReadConfig(sparkSession)))
     val collection = MongoSpark.load[D](sparkSession, readConfig)
     collection.createOrReplaceTempView(collectionName)
@@ -31,28 +35,42 @@ class SparkMongoExtract(sparkSession: SparkSession) {
 }
 
 
-case class AggStructure(
-    project: String, 
-    subproject: String, 
-    name: String, 
-    stage: String,
-    var count: Int
-)
-
 // https://docs.mongodb.com/spark-connector/master/scala/datasets-and-sql/
 case class Id(oid: String)
-case class Comment(code: String, dateTime: String, userIdentity: String, comment: String)
-case class Attachment(dateTime: String, title: String, description: String, userIdentity: String, code: String, contentType: String, filename: String)
-case class Stage(code: String, dateTime: String)
-case class ComponentTypeStage(code: String, name: String, order: Int, initial: Boolean, `final`: Boolean)
+case class Comment(
+  code: String, 
+  dateTime: String, 
+  userIdentity: String, 
+  comment: String
+)
+case class Attachment(
+  dateTime: String, 
+  title: String, 
+  description: String, 
+  userIdentity: String, 
+  code: String, 
+  contentType: String, 
+  filename: String
+)
+case class Stage(
+  code: String, 
+  dateTime: String
+)
+case class ComponentTypeStage(
+  code: String, 
+  name: String, 
+  order: Int, 
+  initial: Boolean, 
+  `final`: Boolean
+)
 case class ComponentTypeType(
-    code: String, 
-    name: String, 
-    version:String, 
-    subprojects:Array[String],
-    snComponentIdentifier:String, 
-    existing:Boolean, 
-    cddNumber:String
+  code: String, 
+  name: String, 
+  version:String, 
+  subprojects:Array[String],
+  snComponentIdentifier:String, 
+  existing:Boolean, 
+  cddNumber:String
 )
 
 case class Sys(cts: java.sql.Timestamp, mts: java.sql.Timestamp, rev: Int)
@@ -76,7 +94,7 @@ case class ComponentType(
 )
 case class Component(
   _id: Id,
-  assembled: Boolean, //flag
+  //assembled: Boolean, //flag
   attachments: Array[Attachment],
   awid: String,
   code: String,
@@ -86,7 +104,7 @@ case class Component(
   //currentGrade: null (nullable = true)
   currentLocation: String,  
   stages: Array[Stage],
-  currentStage: String, // faze zivotniho cyklu
+  currentStage: String, 
   dummy: Boolean,
   //grade: null (nullable = true)
   institution: String,
@@ -98,7 +116,7 @@ case class Component(
   state: String,
   subproject: String,
   sys: Sys,
-  trashed: Boolean, //flag, nepovedla se vyrobit, nebo completed a trashed znamena ze prosla QA a pak byla znicena
+  trashed: Boolean, //flag
   `type`: String,
   userIdentity: String
 )

@@ -1,684 +1,791 @@
 {
-    "annotations": {
-      "list": [
-        {
-          "builtIn": 1,
-          "datasource": "-- Grafana --",
-          "enable": true,
-          "hide": true,
-          "iconColor": "rgba(0, 211, 255, 1)",
-          "name": "Annotations & Alerts",
-          "type": "dashboard"
-        }
-      ]
-    },
-    "editable": true,
-    "gnetId": null,
-    "graphTooltip": 0,
-    "id": 1,
-    "iteration": 1543180435118,
-    "links": [],
-    "panels": [
+  "annotations": {
+    "list": [
       {
-        "aliasColors": {},
-        "bars": true,
-        "dashLength": 10,
-        "dashes": false,
-        "datasource": "influx",
-        "fill": 1,
-        "gridPos": {
-          "h": 7,
-          "w": 24,
-          "x": 0,
-          "y": 0
-        },
-        "id": 2,
-        "legend": {
-          "alignAsTable": true,
-          "avg": false,
-          "current": true,
-          "hideEmpty": true,
-          "hideZero": true,
-          "max": false,
-          "min": false,
-          "rightSide": true,
-          "show": true,
-          "sort": "current",
-          "sortDesc": true,
-          "total": false,
-          "values": true
-        },
-        "lines": false,
-        "linewidth": 2,
-        "links": [],
-        "nullPointMode": "connected",
-        "percentage": true,
-        "pointradius": 5,
-        "points": false,
-        "renderer": "flot",
-        "seriesOverrides": [],
-        "spaceLength": 10,
-        "stack": true,
-        "steppedLine": true,
-        "targets": [
-          {
-            "alias": "$tag_stage",
-            "groupBy": [
-              {
-                "params": [
-                  "1d"
-                ],
-                "type": "time"
-              },
-              {
-                "params": [
-                  "stage"
-                ],
-                "type": "tag"
-              },
-              {
-                "params": [
-                  "none"
-                ],
-                "type": "fill"
-              }
-            ],
-            "measurement": "component",
-            "orderByTime": "ASC",
-            "policy": "default",
-            "refId": "A",
-            "resultFormat": "time_series",
-            "select": [
-              [
-                {
-                  "params": [
-                    "value"
-                  ],
-                  "type": "field"
-                },
-                {
-                  "params": [],
-                  "type": "sum"
-                }
-              ]
-            ],
-            "tags": [
-              {
-                "key": "project",
-                "operator": "=~",
-                "value": "/^$Project$/"
-              },
-              {
-                "condition": "AND",
-                "key": "subproject",
-                "operator": "=~",
-                "value": "/^$Subproject$/"
-              },
-              {
-                "condition": "AND",
-                "key": "name",
-                "operator": "=~",
-                "value": "/^$Component$/"
-              },
-              {
-                "condition": "AND",
-                "key": "stage",
-                "operator": "=~",
-                "value": "/^$Stage$/"
-              }
-            ]
-          }
-        ],
-        "thresholds": [],
-        "timeFrom": null,
-        "timeShift": null,
-        "title": "Components by stage percentage in time",
-        "tooltip": {
-          "shared": true,
-          "sort": 2,
-          "value_type": "individual"
-        },
-        "type": "graph",
-        "xaxis": {
-          "buckets": null,
-          "mode": "time",
-          "name": null,
-          "show": true,
-          "values": []
-        },
-        "yaxes": [
-          {
-            "format": "short",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          },
-          {
-            "format": "short",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": false
-          }
-        ],
-        "yaxis": {
-          "align": false,
-          "alignLevel": null
-        }
-      },
-      {
-        "aliasColors": {},
-        "bars": true,
-        "dashLength": 10,
-        "dashes": false,
-        "datasource": "influx",
-        "fill": 1,
-        "gridPos": {
-          "h": 5,
-          "w": 24,
-          "x": 0,
-          "y": 7
-        },
-        "id": 5,
-        "legend": {
-          "alignAsTable": true,
-          "avg": false,
-          "current": true,
-          "hideEmpty": true,
-          "hideZero": true,
-          "max": false,
-          "min": false,
-          "rightSide": true,
-          "show": true,
-          "sort": "current",
-          "sortDesc": true,
-          "total": false,
-          "values": true
-        },
-        "lines": true,
-        "linewidth": 1,
-        "links": [],
-        "nullPointMode": "connected",
-        "percentage": false,
-        "pointradius": 5,
-        "points": false,
-        "renderer": "flot",
-        "seriesOverrides": [],
-        "spaceLength": 10,
-        "stack": true,
-        "steppedLine": true,
-        "targets": [
-          {
-            "alias": "$tag_stage",
-            "groupBy": [
-              {
-                "params": [
-                  "1d"
-                ],
-                "type": "time"
-              },
-              {
-                "params": [
-                  "stage"
-                ],
-                "type": "tag"
-              },
-              {
-                "params": [
-                  "none"
-                ],
-                "type": "fill"
-              }
-            ],
-            "measurement": "component",
-            "orderByTime": "ASC",
-            "policy": "default",
-            "refId": "A",
-            "resultFormat": "time_series",
-            "select": [
-              [
-                {
-                  "params": [
-                    "value"
-                  ],
-                  "type": "field"
-                },
-                {
-                  "params": [],
-                  "type": "sum"
-                }
-              ]
-            ],
-            "tags": [
-              {
-                "key": "project",
-                "operator": "=~",
-                "value": "/^$Project$/"
-              },
-              {
-                "condition": "AND",
-                "key": "subproject",
-                "operator": "=~",
-                "value": "/^$Subproject$/"
-              },
-              {
-                "condition": "AND",
-                "key": "name",
-                "operator": "=~",
-                "value": "/^$Component$/"
-              },
-              {
-                "condition": "AND",
-                "key": "stage",
-                "operator": "=~",
-                "value": "/^$Stage$/"
-              }
-            ]
-          }
-        ],
-        "thresholds": [],
-        "timeFrom": null,
-        "timeShift": null,
-        "title": "Components by stage in time",
-        "tooltip": {
-          "shared": true,
-          "sort": 2,
-          "value_type": "individual"
-        },
-        "type": "graph",
-        "xaxis": {
-          "buckets": null,
-          "mode": "time",
-          "name": null,
-          "show": true,
-          "values": []
-        },
-        "yaxes": [
-          {
-            "format": "short",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": true
-          },
-          {
-            "format": "short",
-            "label": null,
-            "logBase": 1,
-            "max": null,
-            "min": null,
-            "show": false
-          }
-        ],
-        "yaxis": {
-          "align": false,
-          "alignLevel": null
-        }
-      },
-      {
-        "columns": [],
-        "datasource": "influx",
-        "fontSize": "100%",
-        "gridPos": {
-          "h": 5,
-          "w": 24,
-          "x": 0,
-          "y": 12
-        },
-        "id": 4,
-        "links": [],
-        "pageSize": null,
-        "scroll": true,
-        "showHeader": true,
-        "sort": {
-          "col": 5,
-          "desc": true
-        },
-        "styles": [
-          {
-            "alias": "Time",
-            "colorMode": null,
-            "colors": [
-              "rgba(245, 54, 54, 0.9)",
-              "rgba(237, 129, 40, 0.89)",
-              "rgba(50, 172, 45, 0.97)"
-            ],
-            "dateFormat": "YYYY-MM-DD HH:mm:ss",
-            "decimals": 2,
-            "mappingType": 1,
-            "pattern": "Time",
-            "thresholds": [],
-            "type": "hidden",
-            "unit": "short"
-          },
-          {
-            "alias": "Project",
-            "colorMode": null,
-            "colors": [
-              "rgba(245, 54, 54, 0.9)",
-              "rgba(237, 129, 40, 0.89)",
-              "rgba(50, 172, 45, 0.97)"
-            ],
-            "dateFormat": "YYYY-MM-DD HH:mm:ss",
-            "decimals": 2,
-            "link": false,
-            "mappingType": 1,
-            "pattern": "project",
-            "preserveFormat": false,
-            "thresholds": [
-              ""
-            ],
-            "type": "string",
-            "unit": "short",
-            "valueMaps": []
-          },
-          {
-            "alias": "Count",
-            "colorMode": "value",
-            "colors": [
-              "rgba(245, 54, 54, 0.9)",
-              "rgba(237, 129, 40, 0.89)",
-              "rgba(50, 172, 45, 0.97)"
-            ],
-            "dateFormat": "YYYY-MM-DD HH:mm:ss",
-            "decimals": 0,
-            "mappingType": 1,
-            "pattern": "last",
-            "thresholds": [
-              "1",
-              "6"
-            ],
-            "type": "number",
-            "unit": "short"
-          },
-          {
-            "alias": "Stage",
-            "colorMode": null,
-            "colors": [
-              "rgba(245, 54, 54, 0.9)",
-              "rgba(237, 129, 40, 0.89)",
-              "rgba(50, 172, 45, 0.97)"
-            ],
-            "dateFormat": "YYYY-MM-DD HH:mm:ss",
-            "decimals": 2,
-            "mappingType": 1,
-            "pattern": "stage",
-            "thresholds": [],
-            "type": "string",
-            "unit": "short"
-          },
-          {
-            "alias": "Name",
-            "colorMode": null,
-            "colors": [
-              "rgba(245, 54, 54, 0.9)",
-              "rgba(237, 129, 40, 0.89)",
-              "rgba(50, 172, 45, 0.97)"
-            ],
-            "dateFormat": "YYYY-MM-DD HH:mm:ss",
-            "decimals": 2,
-            "mappingType": 1,
-            "pattern": "name",
-            "thresholds": [],
-            "type": "string",
-            "unit": "short"
-          },
-          {
-            "alias": "Subproject",
-            "colorMode": null,
-            "colors": [
-              "rgba(245, 54, 54, 0.9)",
-              "rgba(237, 129, 40, 0.89)",
-              "rgba(50, 172, 45, 0.97)"
-            ],
-            "dateFormat": "YYYY-MM-DD HH:mm:ss",
-            "decimals": 2,
-            "mappingType": 1,
-            "pattern": "subproject",
-            "thresholds": [],
-            "type": "string",
-            "unit": "short"
-          },
-          {
-            "alias": "",
-            "colorMode": null,
-            "colors": [
-              "rgba(245, 54, 54, 0.9)",
-              "rgba(237, 129, 40, 0.89)",
-              "rgba(50, 172, 45, 0.97)"
-            ],
-            "decimals": 0,
-            "pattern": "/.*/",
-            "thresholds": [],
-            "type": "number",
-            "unit": "short"
-          }
-        ],
-        "targets": [
-          {
-            "groupBy": [
-              {
-                "params": [
-                  "project"
-                ],
-                "type": "tag"
-              },
-              {
-                "params": [
-                  "subproject"
-                ],
-                "type": "tag"
-              },
-              {
-                "params": [
-                  "name"
-                ],
-                "type": "tag"
-              },
-              {
-                "params": [
-                  "stage"
-                ],
-                "type": "tag"
-              }
-            ],
-            "hide": false,
-            "measurement": "component",
-            "orderByTime": "ASC",
-            "policy": "default",
-            "refId": "A",
-            "resultFormat": "table",
-            "select": [
-              [
-                {
-                  "params": [
-                    "value"
-                  ],
-                  "type": "field"
-                },
-                {
-                  "params": [],
-                  "type": "last"
-                }
-              ]
-            ],
-            "tags": [
-              {
-                "key": "project",
-                "operator": "=~",
-                "value": "/^$Project$/"
-              },
-              {
-                "condition": "AND",
-                "key": "subproject",
-                "operator": "=~",
-                "value": "/^$Subproject$/"
-              },
-              {
-                "condition": "AND",
-                "key": "name",
-                "operator": "=~",
-                "value": "/^$Component$/"
-              },
-              {
-                "condition": "AND",
-                "key": "stage",
-                "operator": "=~",
-                "value": "/^$Stage$/"
-              }
-            ]
-          }
-        ],
-        "timeFrom": null,
-        "timeShift": null,
-        "title": "Last known component stage",
-        "transform": "table",
-        "type": "table"
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
       }
-    ],
-    "refresh": false,
-    "schemaVersion": 16,
-    "style": "dark",
-    "tags": [],
-    "templating": {
-      "list": [
-        {
-          "allValue": null,
-          "current": {
-            "text": "All",
-            "value": [
-              "$__all"
-            ]
-          },
-          "datasource": "influx",
-          "hide": 0,
-          "includeAll": true,
-          "label": null,
-          "multi": true,
-          "name": "Project",
-          "options": [],
-          "query": "SHOW TAG VALUES WITH KEY = \"project\"",
-          "refresh": 1,
-          "regex": "",
-          "sort": 1,
-          "tagValuesQuery": "",
-          "tags": [],
-          "tagsQuery": "",
-          "type": "query",
-          "useTags": false
-        },
-        {
-          "allValue": null,
-          "current": {
-            "text": "All",
-            "value": [
-              "$__all"
-            ]
-          },
-          "datasource": "influx",
-          "hide": 0,
-          "includeAll": true,
-          "label": null,
-          "multi": true,
-          "name": "Subproject",
-          "options": [],
-          "query": "SHOW TAG VALUES WITH KEY = \"subproject\"",
-          "refresh": 1,
-          "regex": "",
-          "sort": 1,
-          "tagValuesQuery": "",
-          "tags": [],
-          "tagsQuery": "",
-          "type": "query",
-          "useTags": false
-        },
-        {
-          "allValue": null,
-          "current": {
-            "text": "All",
-            "value": [
-              "$__all"
-            ]
-          },
-          "datasource": "influx",
-          "hide": 0,
-          "includeAll": true,
-          "label": null,
-          "multi": true,
-          "name": "Component",
-          "options": [],
-          "query": "SHOW TAG VALUES WITH KEY = \"name\"",
-          "refresh": 1,
-          "regex": "",
-          "sort": 1,
-          "tagValuesQuery": "",
-          "tags": [],
-          "tagsQuery": "",
-          "type": "query",
-          "useTags": false
-        },
-        {
-          "allValue": null,
-          "current": {
-            "text": "All",
-            "value": [
-              "$__all"
-            ]
-          },
-          "datasource": "influx",
-          "hide": 0,
-          "includeAll": true,
-          "label": null,
-          "multi": true,
-          "name": "Stage",
-          "options": [],
-          "query": "SHOW TAG VALUES WITH KEY = \"stage\"",
-          "refresh": 1,
-          "regex": "",
-          "sort": 1,
-          "tagValuesQuery": "",
-          "tags": [],
-          "tagsQuery": "",
-          "type": "query",
-          "useTags": false
-        }
-      ]
-    },
-    "time": {
-      "from": "now-6h",
-      "to": "now"
-    },
-    "timepicker": {
-      "refresh_intervals": [
-        "5s",
-        "10s",
-        "30s",
-        "1m",
-        "5m",
-        "15m",
-        "30m",
-        "1h",
-        "2h",
-        "1d"
+    ]
+  },
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 1,
+  "iteration": 1546262456387,
+  "links": [],
+  "panels": [
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": false,
+      "colors": [
+        "#299c46",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
       ],
-      "time_options": [
-        "5m",
-        "15m",
-        "1h",
-        "6h",
-        "12h",
-        "24h",
-        "2d",
-        "7d",
-        "30d"
-      ]
+      "datasource": "influx",
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 0,
+        "y": 0
+      },
+      "id": 7,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": [
+                "1d"
+              ],
+              "type": "time"
+            }
+          ],
+          "measurement": "component",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "sum"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "name",
+              "operator": "=~",
+              "value": "/^$Component$/"
+            },
+            {
+              "condition": "AND",
+              "key": "project",
+              "operator": "=~",
+              "value": "/^$Project$/"
+            },
+            {
+              "condition": "AND",
+              "key": "subproject",
+              "operator": "=~",
+              "value": "/^$Subproject$/"
+            },
+            {
+              "condition": "AND",
+              "key": "project",
+              "operator": "=~",
+              "value": "/^$Project$/"
+            },
+            {
+              "condition": "AND",
+              "key": "institution",
+              "operator": "=~",
+              "value": "/^$Institution$/"
+            }
+          ]
+        }
+      ],
+      "thresholds": "",
+      "title": "Components in database",
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
     },
-    "timezone": "",
-    "title": "ComponentsBI",
-    "uid": "_FeGwd1mk",
-    "version": 16
-  }
+    {
+      "columns": [],
+      "datasource": "influx",
+      "fontSize": "100%",
+      "gridPos": {
+        "h": 4,
+        "w": 19,
+        "x": 5,
+        "y": 0
+      },
+      "id": 4,
+      "links": [],
+      "pageSize": null,
+      "scroll": true,
+      "showHeader": true,
+      "sort": {
+        "col": 6,
+        "desc": true
+      },
+      "styles": [
+        {
+          "alias": "Time",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "Time",
+          "thresholds": [],
+          "type": "hidden",
+          "unit": "short"
+        },
+        {
+          "alias": "Project",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "link": false,
+          "mappingType": 1,
+          "pattern": "project",
+          "preserveFormat": false,
+          "thresholds": [
+            ""
+          ],
+          "type": "string",
+          "unit": "short",
+          "valueMaps": []
+        },
+        {
+          "alias": "Count",
+          "colorMode": "value",
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 0,
+          "mappingType": 1,
+          "pattern": "last",
+          "thresholds": [
+            "1",
+            "6"
+          ],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "Stage",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "stage",
+          "thresholds": [],
+          "type": "string",
+          "unit": "short"
+        },
+        {
+          "alias": "Name",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "name",
+          "thresholds": [],
+          "type": "string",
+          "unit": "short"
+        },
+        {
+          "alias": "Subproject",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "subproject",
+          "thresholds": [],
+          "type": "string",
+          "unit": "short"
+        },
+        {
+          "alias": "",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "decimals": 0,
+          "pattern": "/.*/",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        }
+      ],
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": [
+                "project"
+              ],
+              "type": "tag"
+            },
+            {
+              "params": [
+                "subproject"
+              ],
+              "type": "tag"
+            },
+            {
+              "params": [
+                "name"
+              ],
+              "type": "tag"
+            },
+            {
+              "params": [
+                "stage"
+              ],
+              "type": "tag"
+            },
+            {
+              "params": [
+                "institution"
+              ],
+              "type": "tag"
+            }
+          ],
+          "hide": false,
+          "measurement": "component",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "table",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "project",
+              "operator": "=~",
+              "value": "/^$Project$/"
+            },
+            {
+              "condition": "AND",
+              "key": "subproject",
+              "operator": "=~",
+              "value": "/^$Subproject$/"
+            },
+            {
+              "condition": "AND",
+              "key": "name",
+              "operator": "=~",
+              "value": "/^$Component$/"
+            },
+            {
+              "condition": "AND",
+              "key": "stage",
+              "operator": "=~",
+              "value": "/^$Stage$/"
+            },
+            {
+              "condition": "AND",
+              "key": "institution",
+              "operator": "=~",
+              "value": "/^$Institution$/"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Last known component stage",
+      "transform": "table",
+      "type": "table"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "influx",
+      "decimals": 0,
+      "fill": 1,
+      "gridPos": {
+        "h": 13,
+        "w": 24,
+        "x": 0,
+        "y": 4
+      },
+      "id": 5,
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": true,
+        "hideEmpty": true,
+        "hideZero": true,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "sort": "current",
+        "sortDesc": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "connected",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": true,
+      "steppedLine": true,
+      "targets": [
+        {
+          "alias": "$tag_stage",
+          "groupBy": [
+            {
+              "params": [
+                "1d"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "stage"
+              ],
+              "type": "tag"
+            },
+            {
+              "params": [
+                "none"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "component",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "sum"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "project",
+              "operator": "=~",
+              "value": "/^$Project$/"
+            },
+            {
+              "condition": "AND",
+              "key": "subproject",
+              "operator": "=~",
+              "value": "/^$Subproject$/"
+            },
+            {
+              "condition": "AND",
+              "key": "name",
+              "operator": "=~",
+              "value": "/^$Component$/"
+            },
+            {
+              "condition": "AND",
+              "key": "stage",
+              "operator": "=~",
+              "value": "/^$Stage$/"
+            },
+            {
+              "condition": "AND",
+              "key": "institution",
+              "operator": "=~",
+              "value": "/^$Institution$/"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Components by stage in time",
+      "tooltip": {
+        "shared": true,
+        "sort": 2,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    }
+  ],
+  "refresh": false,
+  "schemaVersion": 16,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": "influx",
+        "hide": 0,
+        "includeAll": true,
+        "label": "",
+        "multi": true,
+        "name": "Institution",
+        "options": [
+          {
+            "selected": true,
+            "text": "All",
+            "value": "$__all"
+          },
+          {
+            "selected": false,
+            "text": "Albert-Ludwigs-Universitat Freiburg",
+            "value": "Albert-Ludwigs-Universitat Freiburg"
+          },
+          {
+            "selected": false,
+            "text": "Birmingham University",
+            "value": "Birmingham University"
+          },
+          {
+            "selected": false,
+            "text": "Brandeis University",
+            "value": "Brandeis University"
+          },
+          {
+            "selected": false,
+            "text": "Carleton University",
+            "value": "Carleton University"
+          },
+          {
+            "selected": false,
+            "text": "Faculty of Mathematics and Physics, Charles University",
+            "value": "Faculty of Mathematics and Physics, Charles University"
+          },
+          {
+            "selected": false,
+            "text": "Glasgow University",
+            "value": "Glasgow University"
+          },
+          {
+            "selected": false,
+            "text": "Humboldt University Berlin",
+            "value": "Humboldt University Berlin"
+          },
+          {
+            "selected": false,
+            "text": "Jozef Stefan Institute",
+            "value": "Jozef Stefan Institute"
+          },
+          {
+            "selected": false,
+            "text": "Lawerence Berkeley National Laboratory",
+            "value": "Lawerence Berkeley National Laboratory"
+          },
+          {
+            "selected": false,
+            "text": "Liverpool University",
+            "value": "Liverpool University"
+          },
+          {
+            "selected": false,
+            "text": "Oxford University",
+            "value": "Oxford University"
+          },
+          {
+            "selected": false,
+            "text": "STFC Rutherford Appleton Laboratory",
+            "value": "STFC Rutherford Appleton Laboratory"
+          },
+          {
+            "selected": false,
+            "text": "Unicorn College",
+            "value": "Unicorn College"
+          },
+          {
+            "selected": false,
+            "text": "University of Oslo, Department of Physics",
+            "value": "University of Oslo, Department of Physics"
+          },
+          {
+            "selected": false,
+            "text": "University of Toronto",
+            "value": "University of Toronto"
+          }
+        ],
+        "query": "SHOW TAG VALUES WITH KEY = \"institution\"",
+        "refresh": 0,
+        "regex": "",
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "text": "All",
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "influx",
+        "hide": 0,
+        "includeAll": true,
+        "label": null,
+        "multi": true,
+        "name": "Project",
+        "options": [],
+        "query": "SHOW TAG VALUES WITH KEY = \"project\"",
+        "refresh": 1,
+        "regex": "",
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "text": "All",
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "influx",
+        "hide": 0,
+        "includeAll": true,
+        "label": null,
+        "multi": true,
+        "name": "Subproject",
+        "options": [],
+        "query": "SHOW TAG VALUES WITH KEY = \"subproject\"",
+        "refresh": 1,
+        "regex": "",
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "text": "All",
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "influx",
+        "hide": 0,
+        "includeAll": true,
+        "label": null,
+        "multi": true,
+        "name": "Component",
+        "options": [],
+        "query": "SHOW TAG VALUES WITH KEY = \"name\"",
+        "refresh": 1,
+        "regex": "",
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "text": "All",
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "influx",
+        "hide": 0,
+        "includeAll": true,
+        "label": null,
+        "multi": true,
+        "name": "Stage",
+        "options": [],
+        "query": "SHOW TAG VALUES WITH KEY = \"stage\"",
+        "refresh": 1,
+        "regex": "",
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
+  },
+  "time": {
+    "from": "2018-02-24T06:54:58.631Z",
+    "to": "2018-10-22T08:58:31.405Z"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ],
+    "time_options": [
+      "5m",
+      "15m",
+      "1h",
+      "6h",
+      "12h",
+      "24h",
+      "2d",
+      "7d",
+      "30d"
+    ]
+  },
+  "timezone": "",
+  "title": "Example of Grafana overview dashboard",
+  "uid": "_FeGwd1mk",
+  "version": 23
+}

@@ -18,16 +18,18 @@ class SparkSQLTransform(sparkSession:SparkSession) {
           componentType.code,
           componentType.stages as allStages,
           component.currentStage,
-          component.stages
+          component.stages,
+          institution.name as iname
         FROM component 
         JOIN institution ON (component.institution = institution._id.oid)
         JOIN componentType ON (component.componentType = componentType._id.oid)  
-        WHERE trashed = false AND dummy = false
+        WHERE trashed = false AND dummy = false AND  component.state = "ready"
     """).select(
       col("id"),
       col("project"),
       col("subproject"),
       col("name"),
+      col("iname"),
       col("code"),
       explode(col("stages")).as("stage")
     ).select(

@@ -11,23 +11,33 @@ import com.paulgoldbaum.influxdbclient._
 import java.time._
 import java.time.format.DateTimeFormatter
 
-class InfluxDBLoad(url:String, port:Int, dbName:String) {
+case class AggStructure(
+    project: String, 
+    subproject: String, 
+    name: String, 
+    stage: String,
+    iname: String, 
+    var count: Int
+)
+
+class InfluxDBLoad(url:String, port:Int, dbName:String, sinceDate:String) {
   val DayGranularityConstant = 86400000;
   val InfluxDBTimeoutConstant = 10.second;
-  val AnalysisStartConstant = Instant.from(DateTimeFormatter.ISO_OFFSET_DATE_TIME.parse("2018-02-20T00:00:00+00:00")).toEpochMilli();
+  val AnalysisStartConstant = Instant.from(DateTimeFormatter.ISO_OFFSET_DATE_TIME.parse(sinceDate)).toEpochMilli();
   val AnalysisEndConstant = System.currentTimeMillis() 
   val database = InfluxDB.connect(url, port).selectDatabase(dbName)
   
   def load(rdd:Dataset[Row]) = {
     var itemsById: Map[String, ComponentStructure] = Map()
     var data: ArrayBuffer[ComponentStructure] = ArrayBuffer()
-    rdd.show();
+
     rdd.collect().foreach(item => {
       data += ComponentStructure(
             Instant.from(DateTimeFormatter.ISO_OFFSET_DATE_TIME.parse(item.getAs[String]("dateTime"))).toEpochMilli(),
             if (item.getAs[String]("project") != null) item.getAs[String]("project") else "empty",
             if (item.getAs[String]("subproject") != null) item.getAs[String]("subproject") else "empty",
             if (item.getAs[String]("name") != null) item.getAs[String]("name") else "empty",
+            if (item.getAs[String]("iname") != null) item.getAs[String]("iname") else "empty",
             if (item.getAs[String]("stage_code") != null) item.getAs[String]("stage_code") else "empty",
             if (item.getAs[String]("id") != null) item.getAs[String]("id") else "empty"
       )
@@ -37,28 +47,45 @@ class InfluxDBLoad(url:String, port:Int, dbName:String) {
       Await.result(database.create(), InfluxDBTimeoutConstant)
     }
 
-    // Dirty way how to populate influxDB with O(n^2) complexity
+    // non-optimalized way how to populate influxDB with O(n^2) complexity
     var tmsMilis = AnalysisStartConstant
     while(tmsMilis < AnalysisEndConstant){
       // 1) data are already sorted ASC by date => so extract the last known stage for each item ID
       var group: Map[String, Map[String, String]] = Map();
       data.foreach((item) => {
         if (item.time < tmsMilis + DayGranularityConstant) {
-          val key = item.project + "_" +  item.subproject + "_" +  item.name + "_" +  item.id
-          val value = Map("project" -> item.project, "subproject" -> item.subproject, "name" -> item.name, "stage" -> item.stage)
+          val key = item.project + "_" +  item.subproject + "_" +  item.name + "_" +  item.iname + "_" +  item.id
+          val value = Map(
+            "project" -> item.project, 
+            "subproject" -> item.subproject, 
+            "name" -> item.name, 
+            "stage" -> item.stage, 
+            "iname" -> item.iname
+          )
           // use the last known stage for this item
           group(key) = value;
         }
       })
 
+
       // 2) aggregate the last known stage
       var aggr: Map[String, AggStructure] = Map();
       group.values.foreach(itemLastStage => {
-          val key = itemLastStage("project") + "_" +  itemLastStage("subproject") + "_" +  itemLastStage("name") + "_" +  itemLastStage("stage")
+          val key = itemLastStage("project") + "_" +  
+            itemLastStage("subproject") + "_" +  
+            itemLastStage("name") + "_" +  
+            itemLastStage("stage") + "_" + 
+            itemLastStage("iname")
           if (aggr.contains(key)) {
             aggr(key).count += 1;
           } else {
-            aggr(key) = AggStructure(itemLastStage("project"),itemLastStage("subproject"),itemLastStage("name"), itemLastStage("stage"), 1);
+            aggr(key) = AggStructure(
+              itemLastStage("project"),
+              itemLastStage("subproject"),
+              itemLastStage("name"), 
+              itemLastStage("stage"), 
+              itemLastStage("iname"), 
+            1);
           }
       })
 
@@ -69,9 +96,12 @@ class InfluxDBLoad(url:String, port:Int, dbName:String) {
             .addTag("subproject", send.subproject)
             .addTag("name", send.name)
             .addTag("stage", send.stage)
-            .addField("value", send.count)
-                  
-          Await.result(database.write(point, Parameter.Precision.MILLISECONDS).recover{ case e: WriteException => println(e.getMessage())}, InfluxDBTimeoutConstant)
+            .addTag("institution", send.iname)
+            .addField("value", send.count)    
+          Await.result(
+            database.write(point, Parameter.Precision.MILLISECONDS).recover{ case e: WriteException => println(e.getMessage())}
+            , InfluxDBTimeoutConstant
+            )
         })
       
       tmsMilis += DayGranularityConstant
@@ -85,6 +115,7 @@ case class ComponentStructure(
     project: String, 
     subproject: String, 
     name: String, 
+    iname: String, 
     stage: String,
     id: String
 )
